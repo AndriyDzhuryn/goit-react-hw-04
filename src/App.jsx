@@ -15,7 +15,7 @@ function App() {
   const [loader, setLoader] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [searchValue, setSearchValue] = useState(null);
-  const [pages, setPages] = useState(1);
+  const [pages, setPages] = useState(2);
   const [totalPages, setTotalPages] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [modalImage, setModalImage] = useState({
@@ -68,8 +68,8 @@ function App() {
 
   const fetchImagesubmit = async searchTerm => {
     try {
+      setPages(2);
       setSearchValue(searchTerm);
-      setPages(1);
       setImages(null);
       setLoader(true);
       setErrorMessage(null);
@@ -78,7 +78,7 @@ function App() {
         params: {
           client_id: 'H43MHeoib1rOg9NARWDOA76ysBGu7NV9woWDjNVVvCo',
           query: `${searchTerm}`,
-          page: pages,
+          page: 1,
           per_page: 20,
           orientation: 'landscape',
         },
@@ -86,7 +86,6 @@ function App() {
       const { data } = await axios.get('/search/photos', option);
       setImages(data.results);
       setTotalPages(data.total_pages);
-      setPages(pages + 1);
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -130,7 +129,7 @@ function App() {
       )}
       {loader && <Loader />}
       {errorMessage && <ErrorMessage errorMessage={errorMessage} />}
-      {pages !== totalPages && images !== null && (
+      {pages <= totalPages && images !== null && (
         <LoadMoreBtn fetchImage={fetchImageClick} />
       )}
       <ImageModal
