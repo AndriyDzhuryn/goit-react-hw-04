@@ -11,7 +11,7 @@ import ImageModal from './components/ImageModal/ImageModal.jsx';
 import css from './App.module.css';
 
 function App() {
-  const [images, setImages] = useState(null);
+  const [images, setImages] = useState([]);
   const [loader, setLoader] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [searchValue, setSearchValue] = useState(null);
@@ -70,7 +70,7 @@ function App() {
     try {
       setPages(2);
       setSearchValue(searchTerm);
-      setImages(null);
+      setImages([]);
       setLoader(true);
       setErrorMessage(null);
       axios.defaults.baseURL = 'https://api.unsplash.com';

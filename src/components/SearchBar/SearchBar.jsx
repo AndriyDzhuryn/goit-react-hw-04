@@ -42,7 +42,7 @@ const SearchBar = ({ onSearch, images }) => {
           />
         </Form>
       </Formik>
-      {images === null && <Toaster position="top-right" />}
+      {images.length === 0 && <Toaster position="top-right" />}
     </header>
   );
 };
