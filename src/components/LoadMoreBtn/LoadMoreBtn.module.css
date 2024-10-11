@@ -1,0 +1,13 @@
+.btnLoadMoreBox {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.btnLoadMore {
+  background: #0000ff;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
