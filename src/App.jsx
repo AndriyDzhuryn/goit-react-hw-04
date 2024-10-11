@@ -14,7 +14,7 @@ function App() {
   const [images, setImages] = useState([]);
   const [loader, setLoader] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [searchValue, setSearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
   const [pages, setPages] = useState(2);
   const [totalPages, setTotalPages] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +66,7 @@ function App() {
     });
   };
 
-  const fetchImagesubmit = async searchTerm => {
+  const fetchImageSubmit = async searchTerm => {
     try {
       setPages(2);
       setSearchValue(searchTerm);
@@ -119,7 +119,7 @@ function App() {
 
   return (
     <div className={css.container}>
-      <SearchBar onSearch={fetchImagesubmit} images={images} />
+      <SearchBar onSearch={fetchImageSubmit} searchValue={searchValue} />
       {images !== null && (
         <ImageGallery
           images={images}
@@ -129,7 +129,7 @@ function App() {
       )}
       {loader && <Loader />}
       {errorMessage && <ErrorMessage errorMessage={errorMessage} />}
-      {pages <= totalPages && images !== null && (
+      {pages <= totalPages && images !== null && errorMessage === null && (
         <LoadMoreBtn fetchImage={fetchImageClick} />
       )}
       <ImageModal

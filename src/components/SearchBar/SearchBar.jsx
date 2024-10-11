@@ -9,9 +9,9 @@ const INITIAL_VALUES = {
   searchImage: '',
 };
 
-const SearchBar = ({ onSearch, images }) => {
+const SearchBar = ({ onSearch, searchValue }) => {
   const handleSubmit = (values, actions) => {
-    toast.error('No images found for this request!');
+    toast.error('Field is required');
     onSearch(values.searchImage);
     actions.resetForm();
   };
@@ -42,7 +42,7 @@ const SearchBar = ({ onSearch, images }) => {
           />
         </Form>
       </Formik>
-      {images.length === 0 && <Toaster position="top-right" />}
+      {searchValue === '' && <Toaster position="top-right" />}
     </header>
   );
 };
